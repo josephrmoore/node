@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Scrapbook Backend</title>
+		<meta name="generator" content="TextMate http://macromates.com/">
+		<meta name="author" content="Joseph Moore">
+		<meta name="description" content="">
+	  	<meta name="viewport" content="width=device-width">
+		<!-- Date: 2014-12-07 -->
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+		<link rel="icon" href="favicon.ico" />
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+	  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+	       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	  <!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+		<div id="wrapper">
+		    <form action="">
+		        <ul>
+		          <li><button id="person_section">Person</button></li>
+		          <li><button id="place_section">Place</button></li>
+		          <li><button id="datetime_section">DateTime</button></li>
+		          <li><button id="event_section">Event</button></li>
+		          <li><button id="writing_section">Writing</button></li>
+		          <li><button id="picture_section">Picture</button></li>
+		          <li><button id="audio_section">Audio</button></li>
+		          <li><button id="video_section">Video</button></li>
+		        </ul>
+		        <div id="display_content">
+		            <div id="show_all">
+		                <ul>
+		                    <!-- get results from api and populate -->
+		                    <li>
+		                        <!-- include ways to UPDATE and DELETE -->
+		                    </li>
+		                </ul>
+		            </div>
+		            <div id="create">
+		                <button>+</button>
+		                <div id="create_options">
+		                  <!-- populate with the available fields of that section-->
+		                </div>
+		            </div>
+		        </div>
+            </form>
+		</div>
+
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	    <script>
+	    jQuery(document).ready(function($){
+	        $('#person_section').click(function(){
+                
+	        });
+	        $('#place_section').click(function(){
+	            
+	        });
+	        $('#datetime_section').click(function(){
+	            
+	        });
+	        $('#event_section').click(function(){
+	            
+	        });
+	        $('#writing_section').click(function(){
+	            
+	        });
+	        $('#picture_section').click(function(){
+	            
+	        });
+	        $('#audio_section').click(function(){
+	            
+	        });
+	        $('#video_section').click(function(){
+	            
+	        });
+	        
+	        function api(model, command){
+	            var url = "http://0.0.0.0:8000/api/"+model;
+	            if(command == "show_all"){
+
+	            }
+	            if(command == "create"){
+	                
+	            }
+	            if(command == "update"){
+	                
+	            }
+	            if(command == "delete"){
+	                
+	            }
+	            $.get(url, function( data ) {
+                  return data;
+                });
+	        }
+	        
+	    });
+	    </script>
+	  	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
+	  	<script>
+	    	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	    	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	    	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	    	s.parentNode.insertBefore(g,s)}(document,'script'));
+	  	</script>
+	</body>
+	<!--Copyright (c) 2014 . All rights reserved.-->
+</html>
