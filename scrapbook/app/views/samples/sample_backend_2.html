@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Scrapbook Backend</title>
+		<meta name="generator" content="TextMate http://macromates.com/">
+		<meta name="author" content="Joseph Moore">
+		<meta name="description" content="">
+	  	<meta name="viewport" content="width=device-width">
+		<!-- Date: 2014-12-07 -->
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+		<link rel="icon" href="favicon.ico" />
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+	  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+	       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	  <!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+      <style>
+      body {
+          font-family: Helvetica, Arial, sans-serif;
+      }
+      #wrapper {
+          width: 1000px;
+          margin: 0 auto;
+      }
+      .key, .value {
+          display: block;
+      }
+      .key {
+          font-weight: bold;
+          text-transform: uppercase;
+      }
+      .value {
+          padding-left: 20px;
+      }
+      .off {
+          display: none;
+      }
+      .model {
+          border: 1px solid #666;
+          width: 90%;
+          margin: 10px auto;
+          padding: 10px;
+          position: relative;
+      }
+      h1 {
+          padding: 5px;
+          margin: 0;
+          color: #fff;
+          background: #000;
+      }
+      .new_form {
+          position: absolute;
+          top: 50px;
+          right: 0;
+          border: 1px solid #000;
+          background: #333;
+          color: #ccc;
+      }
+      .new {
+          position: absolute;
+          top: 10px;
+          right: 0;
+      }
+      .item {
+          position: relative;
+      }
+      .save {
+          position: absolute;
+          top: 0;
+          right: 0;
+      }
+      </style>
+		<div id="wrapper">
+		    <h1 id="page_header">Scrapbook API Control Panel</h1>
+            <div class="model" id="person_section">
+              <h1>Person</h1>
+              <button data-model="person" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="person" action="" id="new_person">
+                  <h2>New Person</h2>
+                  <label for="person_name">Name</label>
+                  <input type="text" id="person_name" />
+                  <label for="person_notes">Notes</label>
+                  <input type="text" id="person_notes" />
+                  <label for="person_relation">Relation</label>
+                  <input type="text" id="person_relation" />
+                  <input type="submit" value="Create" id="person_submit" />
+              </form>
+            </div>
+            <div class="model" id="place_section">
+              <h1>Place</h1>
+              <button data-model="place" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="place" action="" id="new_place">
+                  <h2>New Place</h2>
+                  <label for="place_name">Name</label>
+                  <input type="text" id="place_name" />
+                  <label for="place_notes">Notes</label>
+                  <input type="text" id="place_notes" />
+                  <label for="place_location">Location</label>
+                  <input type="text" id="place_location" />
+                  <input type="submit" value="Create" id="place_submit" />
+              </form>
+            </div>
+            <div class="model" id="datetime_section">
+              <h1>DateTime</h1>
+              <button data-model="datetime" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="datetime" action="" id="new_datetime">
+                  <h2>New Date</h2>
+                  <label for="datetime_name">Name</label>
+                  <input type="text" id="datetime_name" />
+                  <label for="datetime_notes">Notes</label>
+                  <input type="text" id="datetime_notes" />
+                  <label for="datetime_date">Date</label>
+                  <input type="text" id="datetime_date" />
+                  <input type="submit" value="Create" id="datetime_submit" />
+              </form>
+            </div>
+            <div class="model" id="writing_section">
+              <h1>Writing</h1>
+              <button data-model="writing" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="writing" action="" id="new_writing">
+                  <h2>New Writing</h2>
+                  <label for="writing_name">Name</label>
+                  <input type="text" id="writing_name" />
+                  <label for="writing_notes">Notes</label>
+                  <input type="text" id="writing_notes" />
+                  <label for="writing_content">Content</label>
+                  <input type="text" id="writing_content" />
+                  <input type="submit" value="Create" id="writing_submit" />
+              </form>
+            </div>
+            <div class="model" id="picture_section">
+              <h1>Picture</h1>
+              <button data-model="picture" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="picture" action="" id="new_picture">
+                  <h2>New Picture</h2>
+                  <label for="picture_name">Name</label>
+                  <input type="text" id="picture_name" />
+                  <label for="picture_notes">Notes</label>
+                  <input type="text" id="picture_notes" />
+                  <label for="picture_file">File</label>
+                  <input type="text" id="picture_file" />
+                  <input type="submit" value="Create" id="picture_submit" />
+              </form>
+            </div>
+            <div class="model" id="audio_section">
+              <h1>Audio</h1>
+              <button data-model="audio" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="audio" action="" id="new_audio">
+                  <h2>New Audio</h2>
+                  <label for="audio_name">Name</label>
+                  <input type="text" id="audio_name" />
+                  <label for="audio_notes">Notes</label>
+                  <input type="text" id="audio_notes" />
+                  <label for="audio_file">File</label>
+                  <input type="text" id="audio_file" />
+                  <input type="submit" value="Create" id="audio_submit" />
+              </form>
+            </div>
+            <div class="model" id="video_section">
+              <h1>Video</h1>
+              <button data-model="video" class="new">New</button>
+              <ul></ul>
+              <form class="new_form off" data-model="video" action="" id="new_video">
+                  <h2>New Video</h2>
+                  <label for="video_name">Name</label>
+                  <input type="text" id="video_name" />
+                  <label for="video_notes">Notes</label>
+                  <input type="text" id="video_notes" />
+                  <label for="video_file">File</label>
+                  <input type="text" id="video_file" />
+                  <input type="submit" value="Create" id="video_submit" />
+              </form>
+            </div>
+            <div class="model" id="event_section">
+              <h1>Event</h1>
+              <ul></ul>
+            </div>
+		</div>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	    <script>
+	    jQuery(document).ready(function($){
+	        var results = {
+	            "picture" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "writing" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "audio" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "video" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "person" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "place" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "datetime" : {
+	                "loaded" : false,
+	                "content" : []
+	            },
+	            "event" : {
+	                "loaded" : false,
+	                "content" : []
+	            }
+	        };
+	        getAll("picture");
+	        getAll("writing");
+	        getAll("audio");
+	        getAll("video");
+	        getAll("person");
+	        getAll("place");
+	        getAll("datetime");
+	        getAll("event");
+	        function getAll(model){
+	            var url = "http://0.0.0.0:8080/api/"+model+"?callback=?";
+	            $.get(url, function(data){
+	                results[model].loaded = true;
+	                results[model].content = data;
+	                var selector = '#' + model + '_section ul';
+	                var html = "";
+	                for(var i=0; i<data.length; i++){
+	                    html += '<li class="item" data-model="' + model + '" data-id="' + data[i]._id + '">';
+	                    html += '<button class="save">Save Changes</button>';
+                        html += '<h2 contentEditable="true" class="name post">';
+	                    html += data[i].name;
+	                    html += '</h2>';
+	                    for(attr in data[i]){
+	                        if(attr == "notes"){
+	                            html += '<p class="notes post" contentEditable="true">';
+	                            html += data[i][attr];
+	                            html += '</p>';
+	                        } else if (attr != "name" && attr != "_id" && attr != "__v"){
+    	                        if(attr == "file" && model == "picture"){
+    	                            html = html + '<span class="file post" contentEditable="true">' + data[i][attr] + '</span>';
+    	                            html = html + '<img src="' + data[i][attr] + '" alt="' + data[i].name + '" />';
+    	                        } else if(attr == "file" && model == "audio"){
+    	                            html = html + '<span class="file post" contentEditable="true">' + data[i][attr] + '</span>';
+    	                            html = html + '<audio controls><source src="' + data[i][attr] + '" /></audio>';
+    	                        } else if(attr == "file" && model == "video"){
+    	                            html = html + '<span class="file post" contentEditable="true">' + data[i][attr] + '</span>';
+    	                            html = html + '<video controls><source src="' + data[i][attr] + '" /></video>';
+    	                        } else if(attr == "content" && model == "writing"){
+    	                            html = html + '<blockquote class="content post" contentEditable="true">' + data[i][attr] + '</blockquote>';
+    	                        } else {
+                                    html += '<span class="key '+attr+'">';
+        	                        html += attr
+        	                        html += '</span><span class="value '+attr+' post" contentEditable="true">';
+        	                        html += data[i][attr];
+        	                        html += '</span>';
+    	                        }
+	                        }
+	                    }
+	                    html += '</li>';
+	                }
+	                $(selector).html(html);
+                    switch(model){
+                		case "person": 
+
+                			break;
+                		case "place": 
+                			
+                			break;
+                		case "datetime": 
+                			
+                			break;
+                		case "event": 
+                			
+                			break;
+                		case "writing": 
+                			
+                			break;
+                		case "picture": 
+                			
+                			break;
+                		case "audio": 
+                			
+                			break;
+                		case "video": 
+                			
+                			break;
+                		default:
+                			break;
+                    }
+	            });
+	        }
+	        checkLoaded();
+	        $('.new').each(function(){
+	           $(this).click(function(){
+	                var parent = $(this).parent();
+	                var form = parent.find('form');
+	                $('.new_form').addClass('off');
+	                form.removeClass('off'); 
+	           }); 
+	        });
+            $('.new_form').each(function(){
+                $(this).submit(function(){
+                    var model = $(this).attr('data-model');
+                    var url = 'http://0.0.0.0:8080/api/'+model+'?callback=?';
+                    var data = {};
+                    switch(model){
+                		case "person": 
+                			data = {
+                			    "name" : $('#person_name').val(),
+                			    "notes" : $('#person_notes').val(),
+                			    "relation" : $('#person_relation').val()
+                			}
+                			break;
+                		case "place": 
+                			data = {
+                			    "name" : $('#place_name').val(),
+                			    "notes" : $('#place_notes').val(),
+                			    "location" : $('#place_location').val()
+                			}
+                			break;
+                		case "datetime": 
+                			data = {
+                			    "name" : $('#datetime_name').val(),
+                			    "notes" : $('#datetime_notes').val(),
+                			    "date" : $('#datetime_date').val()
+                			}			
+                			break;
+                		case "writing": 
+                			data = {
+                			    "name" : $('#writing_name').val(),
+                			    "notes" : $('#writing_notes').val(),
+                			    "content" : $('#writing_content').val()
+                			}	
+                			break;
+                		case "picture": 
+                			data = {
+                			    "name" : $('#picture_name').val(),
+                			    "notes" : $('#picture_notes').val(),
+                			    "file" : $('#picture_file').val()
+                			}	
+                			break;
+                		case "audio": 
+                			data = {
+                			    "name" : $('#audio_name').val(),
+                			    "notes" : $('#audio_notes').val(),
+                			    "file" : $('#audio_file').val()
+                			}	
+                			break;
+                		case "video": 
+                			data = {
+                			    "name" : $('#video_name').val(),
+                			    "notes" : $('#video_notes').val(),
+                			    "file" : $('#video_file').val()
+                			}	
+                			break;
+                		default:
+                			break;
+                    }
+                    $.ajax({
+                       url: url,
+                       type: 'POST',
+                       data: data,
+                       success: function(data) {
+                           console.log(data);
+                       }
+                    });
+                });
+            });
+	        function checkLoaded(){
+	            var interval = setInterval(function(){
+	                console.log("still checking for loaded...");
+	                if(results["picture"].loaded && results["writing"].loaded && results["audio"].loaded && results["video"].loaded && results["person"].loaded && results["place"].loaded && results["datetime"].loaded && results["event"].loaded){
+	                    clearInterval(interval);
+	                    translateEvents();
+	                    console.log("everything loaded, making events.");
+	                    $('.save').each(function(){
+            	            $(this).click(function(){
+            	                var modelObj = $(this).parent();
+            	                var id = modelObj.attr('data-id');
+            	                var model = modelObj.attr('data-model');
+            	                var url = 'http://0.0.0.0:8080/api/'+model+'s/'+id+'?callback=?';
+            	                var data = {};
+                                switch(model){
+                            		case "person": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "relation" : modelObj.find('.relation.post').html()
+                            			}
+                            			break;
+                            		case "place": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "location" : modelObj.find('.location.post').html()
+                            			}
+                            			break;
+                            		case "datetime": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "date" : modelObj.find('.date.post').html()
+                            			}			
+                            			break;
+                            		case "event": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			}	
+                            			break;
+                            		case "writing": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "content" : modelObj.find('.content.post').html()
+                            			}	
+                            			break;
+                            		case "picture": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "file" : modelObj.find('.file.post').html()
+                            			}	
+                            			break;
+                            		case "audio": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "file" : modelObj.find('.file.post').html()
+                            			}	
+                            			break;
+                            		case "video": 
+                            			data = {
+                            			    "name" : modelObj.find('.name.post').html(),
+                            			    "notes" : modelObj.find('.notes.post').html(),
+                            			    "file" : modelObj.find('.file.post').html()
+                            			}	
+                            			break;
+                            		default:
+                            			break;
+                                }
+                                // console.log(data);
+                                // console.log(url);
+                                $.ajax({
+                                   url: url,
+                                   type: 'PUT',
+                                   data: data,
+                                   success: function(data) {
+                                       console.log(data);
+                                   }
+                                });
+                                return false;
+            	            });
+            	        });
+	                }
+	            }, 100);
+	        }
+	        function translateEvents(){
+	            var html = "";
+	            for(var i=0; i<results["event"].content.length; i++){
+	                var r = results["event"].content[i];
+    	            html += '<li data-model="event" data-id="'+r._id+'" class="event"><button class="save">Save Changes</button><h2 contentEditable="true">';
+    	            html += r.name;
+    	            html += '</h2>';
+    	            html += '<ul class="people">';
+	                for(var j=0; j<r.people.length; j++){
+	                    for(var l=0; l<results["person"].content.length; l++){
+	                        if(results["person"].content[l]["_id"] == r.people[j]){
+        	                    html += '<li class="person">';
+                                html += results["person"].content[l]["name"];
+                                html += '</li>';	                            
+	                        }
+	                    }
+
+	                }
+	                html += '</ul>';
+                    for(var q=0; q<results["place"].content.length; q++){
+                        if(results["place"].content[q]["_id"] == r.place){
+    	                    html += '<div class="place">';
+    	                    html += '<h3>';
+                            html += results["place"].content[q]["name"];
+                            html += '</h3>';
+                            html += '<span>';
+                            html += results["place"].content[q]["location"];
+                            html += '</span>';
+                            html += '</div>';	                            
+                        }
+                    }
+                    for(var s=0; s<results["datetime"].content.length; s++){
+                        if(results["datetime"].content[s]["_id"] == r.date){
+    	                    html += '<div class="datetime">';
+    	                    html += '<h3>';
+                            html += results["datetime"].content[s]["name"];
+                            html += '</h3>';
+                            html += '<span>';
+                            html += results["datetime"].content[s]["date"];
+                            html += '</span>';
+                            html += '</div>';	                            
+                        }
+                    }
+    	            html += '<ul class="media">';
+	                for(var k=0; k<r.media.length; k++){
+	                    for(var m=0; m<results["writing"].content.length; m++){
+	                        if(results["writing"].content[m]["_id"] == r.media[k]){
+        	                    html += '<li class="writing">';
+        	                    html += '<h3>';
+                                html += results["writing"].content[m]["name"];
+                                html += '</h3>';
+                                html += '<blockquote>';
+                                html += results["writing"].content[m]["content"];
+                                html += '</blockquote>';
+                                html += '</li>';	                            
+	                        }
+	                    }
+	                    for(var n=0; n<results["picture"].content.length; n++){
+	                        if(results["picture"].content[n]["_id"] == r.media[k]){
+        	                    html += '<li class="picture">';
+        	                    html += '<h3>';
+                                html += results["picture"].content[n]["name"];
+                                html += '</h3>';
+                                html += '<img src="';
+                                html += results["picture"].content[n]["file"];
+                                html += '" alt="';
+                                html += results["picture"].content[n]["name"];
+                                html += '" />'
+                                html += '</li>';	                            
+	                        }
+	                    }
+	                    for(var o=0; o<results["video"].content.length; o++){
+	                        if(results["video"].content[o]["_id"] == r.media[k]){
+        	                    html += '<li class="video">';
+        	                    html += '<h3>';
+                                html += results["video"].content[o]["name"];
+        	                    html += '</h3>';
+	                            html = html + '<video controls><source src="' + results["video"].content[o]["file"] + '" /></video>';
+                                html += '</li>';	                            
+	                        }
+	                    }
+	                    for(var p=0; p<results["audio"].content.length; p++){
+	                        if(results["audio"].content[p]["_id"] == r.media[k]){
+        	                    html += '<li class="audio">';
+        	                    html += '<h3>';
+                                html += results["audio"].content[p]["name"];
+        	                    html += '</h3>';
+	                            html = html + '<audio controls><source src="' + results["audio"].content[p]["file"] + '" /></audio>';
+                                html += '</li>';	                            
+	                        }
+	                    }
+	                }
+	                html += '</ul>';
+                    html += '<p class="notes" contentEditable="true">';
+                    html += r.notes;
+                    html += '</p>';
+                    html += '</li>';
+	            }
+	            $('#event_section ul').html(html);
+	        }
+	    });
+	    </script>
+	  	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
+	  	<script>
+	    	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	    	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	    	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	    	s.parentNode.insertBefore(g,s)}(document,'script'));
+	  	</script>
+	</body>
+	<!--Copyright (c) 2014 . All rights reserved.-->
+</html>
