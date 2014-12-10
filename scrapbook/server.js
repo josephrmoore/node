@@ -9,6 +9,7 @@ var Writing     = require('./app/models/writing');
 var Picture     = require('./app/models/picture');
 var Audio     = require('./app/models/audio');
 var Video     = require('./app/models/video');
+var Feed      = require('./app/models/feed');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://josephmoore:scrapbook@ds061370.mongolab.com:61370/scrapbook');
@@ -55,6 +56,7 @@ setRoutes('writing');
 setRoutes('picture');
 setRoutes('audio');
 setRoutes('video');
+setRoutes('feed');
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
@@ -91,6 +93,9 @@ function getObject(model){
 		case "video": 
 			return new Video();
 			break;
+		case "feed": 
+			return new Feed();
+			break;
 		default:
 			return null;
 			break;
@@ -123,6 +128,9 @@ function getClass(model){
 		case "video": 
 			return Video;
 			break;
+		case "feed": 
+			return Feed;
+			break;
 		default:
 			return null;
 			break;
@@ -154,6 +162,9 @@ function getIdParam(model, request){
 			break;
 		case "video": 
 			return request.params.video_id;
+			break;
+		case "feed": 
+			return request.params.feed_id;
 			break;
 		default:
 			return null;
@@ -205,6 +216,11 @@ function setParams(model, request, object){
 			object.name = request.body.name;
 			object.file = request.body.file;
 			object.notes = request.body.notes;
+		case "feed": 
+			object.name = request.body.name;
+			object.layout = request.body.layout;
+			object.notes = request.body.notes;
+			object.items = request.body.items;
 			break;
 		default:
 			return null;
@@ -213,6 +229,7 @@ function setParams(model, request, object){
 }
 
 function setRoutes(model){
+	// this fx requires 4 context specific chunks of code, pulled in through getObject, getClass, getIdParam, & setParams
 	var obj = getObject(model);
 	var classObj = getClass(model);
 	router.route('/'+model)

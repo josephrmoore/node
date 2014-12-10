@@ -19,7 +19,12 @@
 	  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
 	       chromium.org/developers/how-tos/chrome-frame-getting-started -->
 	  <!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-
+	  
+	    <style>
+	    .off {
+	        display: none;
+	    }
+	    </style>
 		<div id="wrapper">
 		    <h1><a href="index.html">Scrapbook API</a></h1>
 		    <ul>
@@ -49,20 +54,138 @@
 		      </li>
 		    </ul>
 		    <div id="display">
-		      <div class="off" id="person_content"></div>
-		      <div class="off" id="place_content"></div>
-		      <div class="off" id="datetime_content"></div>
-		      <div class="off" id="event_content"></div>
-		      <div class="off" id="writing_content"></div>
-		      <div class="off" id="picture_content"></div>
-		      <div class="off" id="audio_content"></div>
-              <div class="off" id="video_content"></div>
-		    </div>
+                <div class="model_section off" id="person_section">
+                  <h1>Person</h1>
+                  <button data-model="person" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="person" action="" id="new_person">
+                      <h2>New Person</h2>
+                      <label for="person_name">Name</label>
+                      <input type="text" id="person_name" />
+                      <label for="person_notes">Notes</label>
+                      <input type="text" id="person_notes" />
+                      <label for="person_relation">Relation</label>
+                      <input type="text" id="person_relation" />
+                      <input type="submit" value="Create" id="person_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="place_section">
+                  <h1>Place</h1>
+                  <button data-model="place" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="place" action="" id="new_place">
+                      <h2>New Place</h2>
+                      <label for="place_name">Name</label>
+                      <input type="text" id="place_name" />
+                      <label for="place_notes">Notes</label>
+                      <input type="text" id="place_notes" />
+                      <label for="place_location">Location</label>
+                      <input type="text" id="place_location" />
+                      <input type="submit" value="Create" id="place_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="datetime_section">
+                  <h1>DateTime</h1>
+                  <button data-model="datetime" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="datetime" action="" id="new_datetime">
+                      <h2>New Date</h2>
+                      <label for="datetime_name">Name</label>
+                      <input type="text" id="datetime_name" />
+                      <label for="datetime_notes">Notes</label>
+                      <input type="text" id="datetime_notes" />
+                      <label for="datetime_date">Date</label>
+                      <input type="text" id="datetime_date" />
+                      <input type="submit" value="Create" id="datetime_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="writing_section">
+                  <h1>Writing</h1>
+                  <button data-model="writing" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="writing" action="" id="new_writing">
+                      <h2>New Writing</h2>
+                      <label for="writing_name">Name</label>
+                      <input type="text" id="writing_name" />
+                      <label for="writing_notes">Notes</label>
+                      <input type="text" id="writing_notes" />
+                      <label for="writing_content">Content</label>
+                      <input type="text" id="writing_content" />
+                      <input type="submit" value="Create" id="writing_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="picture_section">
+                  <h1>Picture</h1>
+                  <button data-model="picture" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="picture" action="" id="new_picture">
+                      <h2>New Picture</h2>
+                      <label for="picture_name">Name</label>
+                      <input type="text" id="picture_name" />
+                      <label for="picture_notes">Notes</label>
+                      <input type="text" id="picture_notes" />
+                      <label for="picture_file">File</label>
+                      <input type="text" id="picture_file" />
+                      <input type="submit" value="Create" id="picture_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="audio_section">
+                  <h1>Audio</h1>
+                  <button data-model="audio" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="audio" action="" id="new_audio">
+                      <h2>New Audio</h2>
+                      <label for="audio_name">Name</label>
+                      <input type="text" id="audio_name" />
+                      <label for="audio_notes">Notes</label>
+                      <input type="text" id="audio_notes" />
+                      <label for="audio_file">File</label>
+                      <input type="text" id="audio_file" />
+                      <input type="submit" value="Create" id="audio_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="video_section">
+                  <h1>Video</h1>
+                  <button data-model="video" class="new">New</button>
+                  <ul></ul>
+                  <form class="new_form off" data-model="video" action="" id="new_video">
+                      <h2>New Video</h2>
+                      <label for="video_name">Name</label>
+                      <input type="text" id="video_name" />
+                      <label for="video_notes">Notes</label>
+                      <input type="text" id="video_notes" />
+                      <label for="video_file">File</label>
+                      <input type="text" id="video_file" />
+                      <input type="submit" value="Create" id="video_submit" />
+                  </form>
+                </div>
+                <div class="model_section off" id="event_section">
+                  <h1>Event</h1>
+                  <ul></ul>
+                </div>
+            </div>
 		</div>
-
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-	    <script src="js/main.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	    <script>
+	    jQuery(document).ready(function($){
+	        $('.model').each(function(){
+	            $(this).click(function(){
+	                var section = '#' + $(this).attr('id') + '_section';
+	                $('.model_section').addClass('off');
+	                $(section).removeClass('off');
+	            });
+	        });
+	        $('.new').each(function(){
+	           $(this).click(function(){
+	                var parent = $(this).parent();
+	                var form = parent.find('form');
+	                $('.new_form').addClass('off');
+	                form.removeClass('off'); 
+	           }); 
+	        });
+	    });
+	    </script>
 	  	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
 	  	<script>
 	    	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
